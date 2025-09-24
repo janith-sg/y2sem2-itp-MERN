@@ -2,8 +2,9 @@ const express = require("express");
 const dbConnection = require("./config/db");
 const employeeRoutes = require("./routes/employees");
 const petRoutes = require("./routes/pets");
-const appointmentRoutes = require("./routes/appointments"); // NEW
-const sessionRoutes = require("./routes/sessions"); // NEW
+const appointmentRoutes = require("./routes/appointments");
+const sessionRoutes = require("./routes/sessions");
+const userRoutes = require("./routes/users"); // NEW
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
@@ -27,8 +28,9 @@ app.get("/", (req, res) => res.send("Hello server is running.."));
 // Routes
 app.use("/api/employees", employeeRoutes);
 app.use("/api/pets", petRoutes);
-app.use("/api/appointments", appointmentRoutes); // NEW
-app.use("/api/sessions", sessionRoutes); // NEW
+app.use("/api/appointments", appointmentRoutes);
+app.use("/api/sessions", sessionRoutes);
+app.use("/api/users", userRoutes); // NEW
 
 // Start server
 const PORT = 3000;
