@@ -1,0 +1,61 @@
+/* src/components/AdminDashboard.css */
+
+.admin-dashboard {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #f8f9fa;
+}
+
+.dashboard-header {
+  background: #007bff;
+  color: #fff;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.dashboard-header h1 {
+  margin: 0 0 0.5rem 0;
+}
+
+.dashboard-header p {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.dashboard-actions {
+  flex: 1;
+  padding: 2rem 1rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.btn.primary {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.btn.primary:hover {
+  background-color: #0056b3;
+}
+
+.btn.danger {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.btn.danger:hover {
+  background-color: #a71d2a;
+}
+
+.dashboard-footer {
+  text-align: center;
+  padding: 1rem;
+  background: #343a40;
+  color: #fff;
+}

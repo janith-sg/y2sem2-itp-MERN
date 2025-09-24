@@ -1,0 +1,102 @@
+/* InsertPet.css */
+
+/* Overall form container */
+.form-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  background: linear-gradient(135deg, #f0f9ff, #e6f0fa);
+  border-radius: 12px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.form-container:hover {
+  transform: translateY(-3px);
+}
+
+/* Form styling */
+.pet-form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Form heading */
+.pet-form h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #1d4ed8;
+  font-size: 26px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Labels */
+.pet-form label {
+  margin-top: 12px;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* Input fields */
+.pet-form input[type="text"],
+.pet-form input[type="number"],
+.pet-form input[type="file"] {
+  padding: 12px 14px;
+  margin-top: 6px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.pet-form input[type="text"]:focus,
+.pet-form input[type="number"]:focus,
+.pet-form input[type="file"]:focus {
+  border-color: #2563eb;
+  box-shadow: 0px 0px 8px rgba(37, 99, 235, 0.3);
+}
+
+/* Submit button */
+.pet-form .submit-btn {
+  margin-top: 25px;
+  padding: 14px 20px;
+  background: #2563eb;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 17px;
+  transition: all 0.3s ease;
+}
+
+.pet-form .submit-btn:hover {
+  background: #1e40af;
+  transform: scale(1.05);
+  box-shadow: 0px 4px 10px rgba(30, 64, 175, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .form-container {
+    margin: 20px;
+    padding: 20px;
+  }
+
+  .pet-form h2 {
+    font-size: 22px;
+  }
+
+  .pet-form input {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .pet-form .submit-btn {
+    font-size: 15px;
+    padding: 12px;
+  }
+}

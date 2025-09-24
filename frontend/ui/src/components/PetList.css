@@ -1,0 +1,81 @@
+/* Background + overall container */
+.Show_PetList {
+  min-height: 100vh;
+  padding: 30px;
+  background: linear-gradient(to right, #f0f9ff, #e0f2f1);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Content wrapper */
+.container {
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Search bar */
+.search-bar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.search-bar input {
+  width: 100%;
+  max-width: 400px;
+  padding: 12px 16px;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  outline: none;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+}
+
+.search-bar input:focus {
+  border-color: #2563eb;
+  box-shadow: 0px 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+/* Button container */
+.button {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+/* PDF Download Button */
+.button button {
+  background: #2563eb;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0px 6px 14px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.button button:hover {
+  background: #1e40af;
+  transform: scale(1.05);
+}
+
+/* Pet List Grid */
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* Empty state */
+.list:empty::after {
+  content: "No pets found!";
+  text-align: center;
+  font-size: 18px;
+  color: #555;
+  grid-column: 1 / -1;
+}

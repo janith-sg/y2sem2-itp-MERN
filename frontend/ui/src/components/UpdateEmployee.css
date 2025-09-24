@@ -1,0 +1,111 @@
+/* Background and Centering */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.UpdateEmployee {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(to right, #d0f0e4, #cfe9ff);
+  padding: 20px;
+}
+
+/* Form Card */
+.UpdateEmployee form {
+  background: #fff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+}
+
+/* Heading */
+.UpdateEmployee h4 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #1d4ed8;
+  font-size: 24px;
+  text-align: left;
+}
+
+/* Labels */
+.UpdateEmployee label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Inputs */
+.UpdateEmployee input[type="text"],
+.UpdateEmployee input[type="file"] {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.UpdateEmployee input[type="text"]:focus,
+.UpdateEmployee input[type="file"]:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 6px rgba(37, 99, 235, 0.4);
+  outline: none;
+}
+
+/* Pets Section */
+.UpdateEmployee div > input[placeholder] {
+  width: calc(50% - 8px);
+  margin-right: 8px;
+  margin-bottom: 12px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+.UpdateEmployee div > input[placeholder]:last-child {
+  margin-right: 0;
+}
+
+/* Add Pet Button */
+.UpdateEmployee button[type="button"] {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  background: #10b981;
+  color: white;
+  margin-bottom: 16px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.UpdateEmployee button[type="button"]:hover {
+  background: #059669;
+  transform: scale(1.02);
+}
+
+/* Submit Button */
+.UpdateEmployee button[type="submit"] {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  background: #2563eb;
+  color: white;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.UpdateEmployee button[type="submit"]:hover {
+  background: #1e40af;
+  transform: scale(1.02);
+}
