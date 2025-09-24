@@ -1,7 +1,9 @@
 const express = require("express");
 const dbConnection = require("./config/db");
-const employeeRoutes = require("./routes/employees"); // Employee routes
-const petRoutes = require("./routes/pets"); // 👈 Import pets route
+const employeeRoutes = require("./routes/employees");
+const petRoutes = require("./routes/pets");
+const appointmentRoutes = require("./routes/appointments"); // NEW
+const sessionRoutes = require("./routes/sessions"); // NEW
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
@@ -12,9 +14,9 @@ app.use(cors({ origin: true, credentials: true }));
 // DB connection
 dbConnection();
 
-// Body parser
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+// Body parser with increased limit for base64 images
+app.use(bodyParser.json({ limit: "10mb" }));
+app.use(bodyParser.urlencoded({ extended: true, limit: "10mb" }));
 
 // Serve uploads folder statically
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
@@ -24,7 +26,9 @@ app.get("/", (req, res) => res.send("Hello server is running.."));
 
 // Routes
 app.use("/api/employees", employeeRoutes);
-app.use("/api/pets", petRoutes); // 👈 Register pets CRUD
+app.use("/api/pets", petRoutes);
+app.use("/api/appointments", appointmentRoutes); // NEW
+app.use("/api/sessions", sessionRoutes); // NEW
 
 // Start server
 const PORT = 3000;
