@@ -20,15 +20,33 @@ const AdminDashboard = () => {
           <Link to="/pets">
             <Button fullWidth className="btn primary">Manage Pets</Button>
           </Link>
+
+          {/* Team Member 1 Admin Buttons */}
+          <Link to="/appointments">
+            <Button fullWidth className="btn primary">Manage Appointments</Button>
+          </Link>
+          <Link to="/add-appointment">
+            <Button fullWidth className="btn primary">Add Appointments</Button>
+          </Link>
+          <Link to="/doctor-sessions">
+            <Button fullWidth className="btn primary">Doctor Sessions</Button>
+          </Link>
+          <Link to="/add-doctor-session">
+            <Button fullWidth className="btn primary">Add Doctor Session</Button>
+          </Link>
+          {/* Team Member 2 Payment Buttons */}
+          <Link to="/payments">
+            <Button fullWidth className="btn primary">View Payments</Button>
+          </Link>
+          <Link to="/add-payment">
+            <Button fullWidth className="btn primary">Add Payment</Button>
+          </Link>
+
+          {/* Other Admin Buttons */}
           <Link to="/inventory">
             <Button fullWidth className="btn primary">Manage Inventory</Button>
           </Link>
-          <Link to="/appointments">
-            <Button fullWidth className="btn primary">Add Appointments</Button>
-          </Link>
-          <Link to="/appointments">
-            <Button fullWidth className="btn primary">Doctor Session</Button>
-          </Link>
+
           <Link to="/medical-records">
             <Button fullWidth className="btn primary">Medical Records</Button>
           </Link>
@@ -38,6 +56,8 @@ const AdminDashboard = () => {
           <Link to="/feedback">
             <Button fullWidth className="btn primary">Feedback</Button>
           </Link>
+
+          {/* Logout  */}
           <Link to="/logout">
             <Button fullWidth className="btn danger">Logout</Button>
           </Link>

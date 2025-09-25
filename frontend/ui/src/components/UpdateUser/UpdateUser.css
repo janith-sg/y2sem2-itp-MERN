@@ -1,0 +1,69 @@
+/* UpdateUser.css - Centered and Navy Blue themed Animal Clinic Update Form */
+
+.UpdateUser-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f8ff; /* Light clinic-themed background */
+  padding: 20px;
+}
+
+.UpdateUser-form {
+  background-color: #ffffff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+}
+
+.UpdateUser-form h1 {
+  text-align: center;
+  color: #000080; /* Navy blue heading */
+  margin-bottom: 25px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.UpdateUser-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+}
+
+.UpdateUser-form input,
+.UpdateUser-form select {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.UpdateUser-form input:focus,
+.UpdateUser-form select:focus {
+  border-color: #000080;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 0, 128, 0.3);
+}
+
+.UpdateUser-form button {
+  width: 100%;
+  padding: 12px;
+  background-color: #000080; /* Navy blue */
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.UpdateUser-form button:hover {
+  background-color: #000066;
+  transform: scale(1.02);
+}

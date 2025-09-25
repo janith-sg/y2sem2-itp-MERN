@@ -35,8 +35,11 @@ const addUsers = async (req, res, next) => {
 
   let user;
   try {
+    // ensure InvoiceId exists; generate one if user didn't provide
+    const invoice = InvoiceId === undefined || InvoiceId === null || InvoiceId === "" ? Date.now() : InvoiceId;
+
     user = new User({
-      InvoiceId,
+      InvoiceId: invoice,
       PetOwnerName,
       gmail,
       PetName,
@@ -52,6 +55,10 @@ const addUsers = async (req, res, next) => {
     await user.save();
   } catch (err) {
     console.log(err);
+    // if it's a mongoose validation error, return 400 with details
+    if (err.name === "ValidationError") {
+      return res.status(400).json({ message: "Validation error", details: err.message });
+    }
     return res.status(500).json({ message: "Server error during creation" });
   }
 
@@ -118,6 +125,9 @@ const updateUser = async (req, res, next) => {
     );
   } catch (err) {
     console.log(err);
+    if (err.name === "ValidationError") {
+      return res.status(400).json({ message: "Validation error", details: err.message });
+    }
     return res.status(500).json({ message: "Server error during update" });
   }
 

@@ -1,4 +1,4 @@
-// src/App.jsx
+// src/App.jsx - FINAL COMPLETE VERSION
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -17,6 +17,22 @@ import PetList from "./components/PetList";
 import InsertPet from "./components/InsertPet";
 import ShowPetDetails from "./components/ShowPetDetails";
 import UpdatePet from "./components/UpdatePet";
+
+// Appointment components (Team Member 1)
+import AppointmentList from "./components/Appointment/AppointmentList";
+import InsertAppointment from "./components/InsertAppointment/InsertAppointment";
+import EditAppointmentForm from "./components/EditAppointment/EditAppointmentForm";
+import AppointmentDetails from "./components/Appointment/AppointmentDetails";
+
+// Doctor Session components (Team Member 1)
+import DoctorSessionList from "./components/DoctorSession/DoctorSessionList";
+import InsertDoctorSession from "./components/DoctorSession/InsertDoctorSession";
+import EditDoctorSession from "./components/DoctorSession/EditDoctorSession";
+
+// Payment components (Team Member 2)
+import AddUser from "./components/AddUser/AddUser";
+import Users from "./components/Userdetails/Users";
+import UpdateUser from "./components/UpdateUser/UpdateUser";
 
 // Other pages
 import ContactUs from "./components/ContactUs";
@@ -53,6 +69,25 @@ function App() {
           <Route path="/insertpet" element={<InsertPet />} />
           <Route path="/showpet/:id" element={<ShowPetDetails />} />
           <Route path="/updatepet/:id" element={<UpdatePet />} />
+
+          {/* Appointments (Team Member 1) */}
+          <Route path="/appointments" element={<AppointmentList />} />
+          <Route path="/add-appointment" element={<InsertAppointment />} />
+          <Route path="/edit-appointment/:id" element={<EditAppointmentForm />} />
+          <Route path="/appointment-details/:id" element={<AppointmentDetails />} />
+
+          {/* Doctor Sessions (Team Member 1) */}
+          <Route path="/doctor-sessions" element={<DoctorSessionList />} />
+          <Route path="/add-doctor-session" element={<InsertDoctorSession />} />
+          <Route path="/edit-doctor-session/:id" element={<EditDoctorSession />} />
+
+          {/* Payments (Team Member 2) */}
+          <Route path="/payments" element={<Users />} />
+          <Route path="/add-payment" element={<AddUser />} />
+          <Route path="/update-payment/:id" element={<UpdateUser />} />
+          {/* Legacy / alternate routes used by other components */}
+          <Route path="/userdetails" element={<Users />} />
+          <Route path="/userdetails/:id" element={<UpdateUser />} />
 
           {/* Contact + About */}
           <Route path="/contact" element={<ContactUs />} />

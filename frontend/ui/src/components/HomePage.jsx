@@ -105,16 +105,29 @@ const HomePage = () => {
             <p>Access pet profiles and records</p>
           </Link>
 
+          {/* Team Member 1 Cards */}
+          <Link to="/appointments" className="feature-card">
+            <div className="card-icon">📅</div>
+            <h3>View Appointments</h3>
+            <p>Check and manage appointments</p>
+          </Link>
+
+          <Link to="/add-appointment" className="feature-card">
+            <div className="card-icon">➕</div>
+            <h3>Create Appointment</h3>
+            <p>Schedule new appointments</p>
+          </Link>
+
+          <Link to="/doctor-sessions" className="feature-card">
+            <div className="card-icon">👨‍⚕️</div>
+            <h3>View Sessions</h3>
+            <p>View Doctor sessions</p>
+          </Link>
+
           <Link to="/inventory" className="feature-card">
             <div className="card-icon">📦</div>
             <h3>Inventory</h3>
             <p>Manage medical supplies and stock</p>
-          </Link>
-
-          <Link to="/appointments/add" className="feature-card">
-            <div className="card-icon">📅</div>
-            <h3>Veiw Appointment</h3>
-            <p>Schedule new appointments</p>
           </Link>
 
           <Link to="/medical-records" className="feature-card">
