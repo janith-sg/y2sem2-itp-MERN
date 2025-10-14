@@ -2,6 +2,7 @@ const path = require("path");
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const bodyParser = require("body-parser");
 require("dotenv").config();
 
 const dbConnection = require("./config/db");
@@ -18,6 +19,10 @@ const prescriptionRoutes = require("./routes/prescriptionRoutes");
 const vaccinationRoutes = require("./routes/vaccinationRoutes");
 const labResultRoutes = require("./routes/labResultRoutes");
 const uploadRoutes = require("./routes/uploadRoutes");
+
+// Team-mate's routes
+const sessionRoutes = require("./routes/sessions");
+const userRoutes = require("./routes/users");
 
 // Import utility functions
 const { getNextSeq } = require("./utils/getNextSeq");
@@ -41,6 +46,9 @@ app.use(
 );
 
 // ---------- Parsers ----------
+// Using both body-parser (from team-mate) and express built-in parsers
+app.use(bodyParser.json({ limit: "10mb" }));
+app.use(bodyParser.urlencoded({ extended: true, limit: "10mb" }));
 app.use(express.json({ limit: "5mb" }));
 app.use(express.urlencoded({ extended: true }));
 
@@ -48,7 +56,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // ---------- Routes ----------
-// Your existing routes
+// existing routes
 app.use("/api/employees", employeeRoutes);
 app.use("/api/pets", petRoutes);
 app.use("/api/appointments", appointmentRoutes);
@@ -60,6 +68,10 @@ app.use("/api/prescriptions", prescriptionRoutes);
 app.use("/api/vaccinations", vaccinationRoutes);
 app.use("/api/labresults", labResultRoutes);
 app.use("/api/uploads", uploadRoutes);
+
+// other's routes
+app.use("/api/sessions", sessionRoutes);
+app.use("/api/users", userRoutes);
 
 // ---------- Health / Root ----------
 app.get("/", (_req, res) => {
