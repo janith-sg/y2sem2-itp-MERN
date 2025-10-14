@@ -1,0 +1,81 @@
+.labresult-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  transition: all .2s ease;
+}
+
+.labresult-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+.labresult-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.labresult-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .5rem .75rem;
+  border-radius: var(--radius);
+  background: var(--background-secondary);
+  color: var(--foreground);
+  font-weight: 600;
+}
+
+.labresult-card-actions {
+  display: flex;
+  gap: .5rem;
+}
+
+.labresult-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--background-secondary);
+  color: var(--foreground);
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+.labresult-action-btn:hover {
+  background: var(--secondary);
+  color: var(--secondary-foreground);
+  transform: scale(1.05);
+}
+
+.labresult-action-btn.delete:hover {
+  background: var(--error);
+  color: #fff;
+}
+
+.labresult-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin: .25rem 0 .5rem;
+}
+
+.labresult-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .5rem .75rem;
+  color: var(--muted-foreground);
+  font-size: .9rem;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}

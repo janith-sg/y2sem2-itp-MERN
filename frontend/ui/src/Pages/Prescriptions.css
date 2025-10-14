@@ -1,0 +1,117 @@
+.prescriptions-page {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.prescriptions-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.prescriptions-title-section {
+  flex: 1;
+}
+
+.prescriptions-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-bottom: 0.5rem;
+}
+
+.prescriptions-subtitle {
+  color: var(--muted-foreground);
+  font-size: 1rem;
+}
+
+.prescriptions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.prescription-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.prescription-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+.prescription-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.prescription-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: var(--accent-foreground);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.prescription-date {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+}
+
+.prescription-medication {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--foreground);
+  margin: 0 0 1rem 0;
+}
+
+.prescription-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.prescription-detail {
+  display: flex;
+  justify-content: space-between;
+}
+
+.detail-label {
+  color: var(--muted-foreground);
+  font-weight: 500;
+}
+
+.detail-value {
+  color: var(--foreground);
+  font-weight: 500;
+}
+
+.prescription-footer {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.prescription-pet,
+.prescription-vet {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}

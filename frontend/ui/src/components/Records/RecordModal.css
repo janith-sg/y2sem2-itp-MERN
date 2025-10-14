@@ -1,0 +1,42 @@
+.record-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+fieldset.group {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: .75rem;
+    background: var(--background-secondary);
+}
+
+legend.group-title {
+    padding: 0 .5rem;
+    color: var(--muted-foreground);
+    font-size: .9rem;
+}
+
+.two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .75rem;
+}
+
+/* 🛑 CRITICAL FIX: Hides the spin buttons (up/down arrows) from number inputs 🛑 */
+
+/* Targets Chrome, Edge, and Safari */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Targets Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+@media (max-width: 768px) {
+    .two-col { grid-template-columns: 1fr; }
+}

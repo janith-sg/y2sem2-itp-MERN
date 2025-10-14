@@ -119,11 +119,22 @@ const HomePage = () => {
             <p>View and manage appointments</p>
           </Link>
 
-          <Link to="/medical-records" className="feature-card">
-            <div className="card-icon">🏥</div>
-            <h3>Medical Records</h3>
-            <p>View patient medical history</p>
-          </Link>
+          {/* Medical Records Cards - Conditionally Shown Based on Role */}
+{user?.role === 'admin' && (
+  <Link to="/medical-records" className="feature-card">
+    <div className="card-icon">🏥</div>
+    <h3>Medical Records</h3>
+    <p>Access complete medical history and records</p>
+  </Link>
+)}
+
+{user?.role === 'user' && (
+  <Link to="/user/petid-gate" className="feature-card">
+    <div className="card-icon">📋</div>
+    <h3>My Pet's Records</h3>
+    <p>View your pet's medical history</p>
+  </Link>
+)}
 
           <Link to="/doctorsession" className="feature-card">
             <div className="card-icon">👨‍⚕️</div>

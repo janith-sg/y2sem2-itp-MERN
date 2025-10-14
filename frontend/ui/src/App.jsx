@@ -1,5 +1,8 @@
-// src/App.jsx
+"use client";
 import "./App.css";
+import "./CSS/index.css"; 
+import "./CSS/App.css";
+
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
@@ -42,14 +45,50 @@ import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
 import Orders from "./components/Orders";
 
+// Medical Records Components (Teammate's System)
+import Layout from "./Components/Layout/Layout";
+import UserRoutes from "./USER/Routes/UserRoutes";
+import PetIdGate from "./USER/Pages/PetIdGate";
+
+// Admin Medical Records Components
+import DashboardPage from "./Components/Dashboard/DashboardPage";
+import RecordList from "./Components/Records/RecordList";
+import PrescriptionList from "./Components/Prescriptions/PrescriptionList";
+import VaccinationList from "./Components/Vaccinations/VaccinationList";
+import LabResultList from "./Components/LabResults/LabResultList";
+
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
 
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from "react-router-dom";
 
+// Medical Records Wrappers
+const AdminMedicalRecords = () => (
+  <Layout pathPrefix="">
+    <div className="App">
+      <Routes>
+        <Route path="/" element={<DashboardPage />} />
+        <Route path="/records" element={<RecordList />} />
+        <Route path="/prescriptions" element={<PrescriptionList />} />
+        <Route path="/vaccinations" element={<VaccinationList />} />
+        <Route path="/labresults" element={<LabResultList />} />
+        <Route path="*" element={<DashboardPage />} />
+      </Routes>
+    </div>
+  </Layout>
+);
+
+const UserMedicalRecords = () => (
+  <Layout pathPrefix="/user">
+    <div className="App">
+      <UserRoutes />
+    </div>
+  </Layout>
+);
+
 function AppContent() {
   const location = useLocation();
   const { user } = useAuth();
-  const hideNavbarRoutes = ["/login", "/signup"];
+  const hideNavbarRoutes = ["/login", "/signup", "/user/petid-gate"];
   const shouldShowNavbar = !hideNavbarRoutes.includes(location.pathname);
 
   // Redirect to login if not authenticated (except for login and signup pages)
@@ -57,94 +96,137 @@ function AppContent() {
     return <Navigate to="/login" replace />;
   }
 
+  // Special handling for petid-gate - no navbar
+  if (location.pathname.endsWith('/petid-gate')) {
+    return (
+      <Routes>
+        <Route path="/user/petid-gate" element={<PetIdGate />} />
+      </Routes>
+    );
+  }
+
   return (
     <>
       {shouldShowNavbar && <Navbar />}
       <Routes>
-          {/* Home */}
-          <Route path="/" element={<HomePage />} />
+        {/* Medical Records Routes */}
+        {/* Admin Medical Records - Direct Routes */}
+        <Route path="/medical-records" element={
+          <Layout pathPrefix="">
+            <DashboardPage />
+          </Layout>
+        } />
+        <Route path="/records" element={
+          <Layout pathPrefix="">
+            <RecordList />
+          </Layout>
+        } />
+        <Route path="/prescriptions" element={
+          <Layout pathPrefix="">
+            <PrescriptionList />
+          </Layout>
+        } />
+        <Route path="/vaccinations" element={
+          <Layout pathPrefix="">
+            <VaccinationList />
+          </Layout>
+        } />
+        <Route path="/labresults" element={
+          <Layout pathPrefix="">
+            <LabResultList />
+          </Layout>
+        } />
 
-          {/* Login */}
-          <Route path="/login" element={<Login />} />
-          
-          {/* Sign Up */}
-          <Route path="/signup" element={<SignUp />} />
-          
-          {/* Users List */}
-          <Route path="/users" element={<UsersList />} />
-          
-          {/* Add Inventory - Admin Only */}
-          <Route 
-            path="/add-inventory" 
-            element={
-              <ProtectedRoute requiredRole="admin">
-                <AddInventory />
-              </ProtectedRoute>
-            } 
-          />
-          
-          {/* View Inventory */}
-          <Route path="/inventory" element={<InventoryList />} />
-          
-          {/* Inventory Details */}
-          <Route path="/inventory/:id/details" element={<InventoryDetails />} />
-          
-          {/* Update Inventory */}
-          <Route path="/inventory/:id/edit" element={<UpdateInventory />} />
-          
-          {/* Cart and Checkout */}
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/orders" element={<Orders />} />
-          
-          {/* Add Appointment */}
-          <Route path="/add-appointment" element={<AddAppointment />} />
-          
-          {/* View Appointments */}
-          <Route path="/appointments" element={<AppointmentList />} />
-          
-          {/* Appointment Details */}
-          <Route path="/appointment-details/:id" element={<AppointmentDetails />} />
-          
-          {/* Edit Appointment */}
-          <Route path="/edit-appointment/:id" element={<UpdateAppointment />} />
+        {/* User Medical Records */}
+        <Route path="/user/medical-records/*" element={<UserMedicalRecords />} />
 
-          {/* Employees */}
-          <Route path="/employees" element={<EmployeeList />} />
-          <Route path="/insert" element={<InsertEmployee />} />
-          <Route path="/showdetails/:id" element={<ShowEmployeeDetail />} />
-          <Route path="/updatedetails/:id" element={<UpdateEmployee />} />
+        {/* Medical Records Gate */}
+        <Route path="/user/petid-gate" element={<PetIdGate />} />
 
-          {/* Users (same components as employees but with different routes) */}
-          <Route path="/insert-employee" element={<InsertEmployee />} />
-          <Route path="/show-employee-details/:id" element={<ShowEmployeeDetail />} />
-          <Route path="/update-employee/:id" element={<UpdateEmployee />} />
+        {/* Home */}
+        <Route path="/" element={<HomePage />} />
 
-          {/* Pets */}
-          <Route path="/pets" element={<PetList />} />
-          <Route path="/insertpet" element={<InsertPet />} />
-          <Route path="/showpet/:petId" element={<ShowPet />} />
-          <Route path="/updatepet/:id" element={<UpdatePet />} />
+        {/* Login */}
+        <Route path="/login" element={<Login />} />
 
-          {/* Contact + About */}
-          <Route path="/contact" element={<ContactUs />} />
-          <Route path="/about" element={<AboutUs />} />
+        {/* Sign Up */}
+        <Route path="/signup" element={<SignUp />} />
 
-          {/* Admin (protected) */}
-          <Route
-            path="/admindashboard"
-            element={
-              <ProtectedRoute requiredRole="admin">
-                <AdminDashboard />
-              </ProtectedRoute>
-            }
-          />
-          
-          {/* Catch all other routes and redirect to login if not authenticated */}
-          <Route path="*" element={user ? <Navigate to="/" replace /> : <Navigate to="/login" replace />} />
-        </Routes>
-        <Footer />
-      </>
+        {/* Users List */}
+        <Route path="/users" element={<UsersList />} />
+
+        {/* Add Inventory - Admin Only */}
+        <Route
+          path="/add-inventory"
+          element={
+            <ProtectedRoute requiredRole="admin">
+              <AddInventory />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* View Inventory */}
+        <Route path="/inventory" element={<InventoryList />} />
+
+        {/* Inventory Details */}
+        <Route path="/inventory/:id/details" element={<InventoryDetails />} />
+
+        {/* Update Inventory */}
+        <Route path="/inventory/:id/edit" element={<UpdateInventory />} />
+
+        {/* Cart and Checkout */}
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/orders" element={<Orders />} />
+
+        {/* Add Appointment */}
+        <Route path="/add-appointment" element={<AddAppointment />} />
+
+        {/* View Appointments */}
+        <Route path="/appointments" element={<AppointmentList />} />
+
+        {/* Appointment Details */}
+        <Route path="/appointment-details/:id" element={<AppointmentDetails />} />
+
+        {/* Edit Appointment */}
+        <Route path="/edit-appointment/:id" element={<UpdateAppointment />} />
+
+        {/* Employees */}
+        <Route path="/employees" element={<EmployeeList />} />
+        <Route path="/insert" element={<InsertEmployee />} />
+        <Route path="/showdetails/:id" element={<ShowEmployeeDetail />} />
+        <Route path="/updatedetails/:id" element={<UpdateEmployee />} />
+
+        {/* Users (same components as employees but with different routes) */}
+        <Route path="/insert-employee" element={<InsertEmployee />} />
+        <Route path="/show-employee-details/:id" element={<ShowEmployeeDetail />} />
+        <Route path="/update-employee/:id" element={<UpdateEmployee />} />
+
+        {/* Pets */}
+        <Route path="/pets" element={<PetList />} />
+        <Route path="/insertpet" element={<InsertPet />} />
+        <Route path="/showpet/:petId" element={<ShowPet />} />
+        <Route path="/updatepet/:id" element={<UpdatePet />} />
+
+        {/* Contact + About */}
+        <Route path="/contact" element={<ContactUs />} />
+        <Route path="/about" element={<AboutUs />} />
+
+        {/* Admin (protected) */}
+        <Route
+          path="/admindashboard"
+          element={
+            <ProtectedRoute requiredRole="admin">
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Catch all other routes and redirect to login if not authenticated */}
+        <Route path="*" element={user ? <Navigate to="/" replace /> : <Navigate to="/login" replace />} />
+      </Routes>
+      {shouldShowNavbar && <Footer />}
+    </>
   );
 }
 

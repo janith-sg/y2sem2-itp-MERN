@@ -1,0 +1,111 @@
+.vaccinations-page {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.vaccinations-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.vaccinations-title-section {
+  flex: 1;
+}
+
+.vaccinations-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-bottom: 0.5rem;
+}
+
+.vaccinations-subtitle {
+  color: var(--muted-foreground);
+  font-size: 1rem;
+}
+
+.vaccinations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.vaccination-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.vaccination-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+.vaccination-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.vaccination-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius);
+  background: var(--success);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vaccination-status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.vaccination-status.completed {
+  background: rgb(34 197 94 / 0.1);
+  color: var(--success);
+}
+
+.vaccination-status.due {
+  background: rgb(245 158 11 / 0.1);
+  color: var(--warning);
+}
+
+.vaccination-vaccine {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--foreground);
+  margin: 0 0 1rem 0;
+}
+
+.vaccination-pet {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--secondary);
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.vaccination-dates {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.vaccination-date {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}

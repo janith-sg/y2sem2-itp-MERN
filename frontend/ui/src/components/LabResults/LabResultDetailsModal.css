@@ -1,0 +1,7 @@
+.labresult-details-modal{ max-width:720px; width:95%; }
+.lr-details{ display:grid; gap:1rem; }
+.section{ background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg); padding:1rem; }
+.kv{ display:grid; grid-template-columns:160px 1fr; gap:.5rem 1rem; }
+.kv .key{ color:var(--muted-foreground); font-weight:600; }
+.kv .val{ color:var(--foreground); word-break:break-word; }
+@media (max-width:768px){ .kv{ grid-template-columns:1fr; } }

@@ -1,0 +1,441 @@
+/* src/CSS/App.css (COMPLETE & MODIFIED) */
+
+/* ----------------------------------------------------
+  0. Global App & Root Setup (Essential for modal)
+---------------------------------------------------- */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.App {
+  min-height: 100vh;
+  background: var(--background);
+}
+
+/* ----------------------------------------------------
+  1. Full-screen Pet ID Gate Modal Fixes 
+---------------------------------------------------- */
+.modal-overlay {
+  /* CRITICAL: Fixed position relative to viewport, essential for full-screen takeover */
+  position: fixed; 
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  
+  /* Ensure it sits above all other page content */
+  z-index: 9999; /* ✅ FIX: High z-index to dominate Navbar/Sidebar */
+  
+  /* Center the modal content */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.5); 
+}
+
+.modal-content {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+}
+
+/* --- Added: modal header/footer utilities used by feature modals --- */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: .5rem;
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin: 0;
+}
+
+.modal-header-actions {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.modal-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border);
+  background: var(--primary);
+  color: var(--primary-foreground);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all .2s ease;
+}
+.modal-close:hover { background: var(--background-secondary); }
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: .5rem;
+  margin-top: 1rem;
+}
+
+/* ----------------------------------------------------
+  2. Loading States 
+---------------------------------------------------- */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.spinner {
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid var(--border);
+  border-top: 2px solid var(--secondary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+/* ----------------------------------------------------
+  3. Form Styles 
+---------------------------------------------------- */
+.form-group { margin-bottom: 1rem; }
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--foreground);
+}
+
+.form-error {
+  color: var(--error);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+/* Input utility used in PetIdGate (search bar) */
+.search-container .search input {
+  padding: 0.5rem; 
+}
+
+.search-container input {
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--input, #fff);
+  color: var(--foreground);
+}
+
+
+/* Button utility used in PetIdGate */
+.btn-primary {
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  border-radius: 0.5rem;
+  background: var(--primary, #22c55e);
+  color: white;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark, #16a34a);
+}
+
+/* ----------------------------------------------------
+  4. Table Styles & Misc 
+---------------------------------------------------- */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+}
+
+.table th,
+.table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.table th {
+  background: var(--background-secondary);
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.table tr:hover { background: var(--card-hover); }
+
+/* Section headings inside details modals */
+.section-title {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-weight: 600;
+  margin-bottom: .75rem;
+  color: var(--foreground);
+}
+
+
+/* Status Badges */
+.badge {
+  display: inline-block; /* ⬅️ FIX for empty rule */
+}
+
+.badge-success {
+  background: rgb(34 197 94 / 0.1);
+  color: var(--success);
+}
+
+.badge-warning {
+  background: rgb(245 158 11 / 0.1);
+  color: var(--warning);
+}
+
+.badge-error {
+  background: rgb(239 68 68 / 0.1);
+  color: var(--error);
+}
+
+.badge-info {
+  background: rgb(59 130 246 / 0.1);
+  color: var(--info);
+}
+
+/* Optional: accessible focus ring for buttons/links to match inputs */
+button:focus-visible, a:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgb(34 197 94 / 0.15);
+  border-color: var(--ring);
+}
+
+/* Optional: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .spinner { animation: none; }
+  * { scroll-behavior: auto; }
+}
+
+
+
+
+
+
+/*.App {
+  min-height: 100vh;
+  background: var(--background);
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.spinner {
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid var(--border);
+  border-top: 2px solid var(--secondary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+.form-group { margin-bottom: 1rem; }
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--foreground);
+}
+
+.form-error {
+  color: var(--error);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border); 
+}
+
+.table th,
+.table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.table th {
+  background: var(--background-secondary);
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.table tr:hover { background: var(--card-hover); }
+
+
+.modal-overlay {
+  position: fixed;
+  inset: 0; 
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+}
+
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: .5rem;
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin: 0;
+}
+
+.modal-header-actions {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.modal-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border);
+  background: var(--primary);
+  color: var(--primary-foreground);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all .2s ease;
+}
+.modal-close:hover { background: var(--background-secondary); }
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: .5rem;
+  margin-top: 1rem;
+}
+
+
+.section-title {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-weight: 600;
+  margin-bottom: .75rem;
+  color: var(--foreground);
+}
+
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.badge-success {
+  background: rgb(34 197 94 / 0.1);
+  color: var(--success);
+}
+
+.badge-warning {
+  background: rgb(245 158 11 / 0.1);
+  color: var(--warning);
+}
+
+.badge-error {
+  background: rgb(239 68 68 / 0.1);
+  color: var(--error);
+}
+
+.badge-info {
+  background: rgb(59 130 246 / 0.1);
+  color: var(--info);
+}
+
+
+button:focus-visible, a:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgb(34 197 94 / 0.15);
+  border-color: var(--ring);
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner { animation: none; }
+  * { scroll-behavior: auto; }
+}
+*/
