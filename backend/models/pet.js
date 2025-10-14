@@ -30,6 +30,11 @@ const PetSchema = new mongoose.Schema({
   birthday: {
     type: Date,
   },
+  age: {
+    type: Number,
+    min: 0,
+    max: 50
+  },
   ownerContact: {
     type: String,
     required: true,

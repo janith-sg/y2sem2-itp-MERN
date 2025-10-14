@@ -1,0 +1,173 @@
+/* Global Button Styles - Consistent across all pages */
+
+/* Bootstrap button overrides for consistent colors and better visibility */
+.btn {
+  padding: 8px 16px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  border-radius: 4px !important;
+  margin: 2px !important;
+  min-width: 70px !important;
+  text-align: center !important;
+}
+
+.btn-sm {
+  padding: 6px 12px !important;
+  font-size: 12px !important;
+  min-width: 60px !important;
+}
+
+.btn-warning {
+  background-color: #ffc107 !important;
+  border-color: #ffc107 !important;
+  color: #212529 !important;
+  font-weight: 600 !important;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800 !important;
+  border-color: #d39e00 !important;
+  color: #212529 !important;
+}
+
+.btn-success {
+  background-color: #28a745 !important;
+  border-color: #28a745 !important;
+  color: white !important;
+  font-weight: 600 !important;
+}
+
+.btn-success:hover {
+  background-color: #1e7e34 !important;
+  border-color: #1c7430 !important;
+  color: white !important;
+}
+
+.btn-danger {
+  background-color: #dc3545 !important;
+  border-color: #dc3545 !important;
+  color: white !important;
+  font-weight: 600 !important;
+}
+
+.btn-danger:hover {
+  background-color: #c82333 !important;
+  border-color: #bd2130 !important;
+  color: white !important;
+}
+
+/* Bootstrap outline button overrides for consistent colors and better visibility */
+.btn-outline-warning {
+  color: #212529 !important;
+  border-color: #ffc107 !important;
+  background-color: #ffc107 !important;
+  font-weight: 600 !important;
+  padding: 8px 16px !important;
+  font-size: 14px !important;
+}
+
+.btn-outline-warning:hover {
+  color: #212529 !important;
+  background-color: #e0a800 !important;
+  border-color: #d39e00 !important;
+}
+
+.btn-outline-success {
+  color: white !important;
+  border-color: #28a745 !important;
+  background-color: #28a745 !important;
+  font-weight: 600 !important;
+  padding: 8px 16px !important;
+  font-size: 14px !important;
+}
+
+.btn-outline-success:hover {
+  color: white !important;
+  background-color: #1e7e34 !important;
+  border-color: #1c7430 !important;
+}
+
+.btn-outline-danger {
+  color: white !important;
+  border-color: #dc3545 !important;
+  background-color: #dc3545 !important;
+  font-weight: 600 !important;
+  padding: 8px 16px !important;
+  font-size: 14px !important;
+}
+
+.btn-outline-danger:hover {
+  color: white !important;
+  background-color: #c82333 !important;
+  border-color: #bd2130 !important;
+}
+
+/* Material-UI Button overrides for better visibility */
+.MuiButton-root {
+  padding: 6px 12px !important;
+  font-size: 12px !important;
+  min-width: 60px !important;
+  font-weight: 600 !important;
+}
+
+.MuiButton-containedError {
+  background-color: #dc3545 !important;
+  color: white !important;
+  font-weight: 600 !important;
+  padding: 6px 12px !important;
+  font-size: 12px !important;
+}
+
+.MuiButton-containedError:hover {
+  background-color: #c82333 !important;
+}
+
+/* Card Actions - Make buttons better sized for cards */
+.MuiCardActions-root {
+  padding: 8px !important;
+}
+
+.MuiCardActions-root .MuiButton-root {
+  margin: 2px !important;
+  padding: 6px 12px !important;
+  font-size: 12px !important;
+  min-width: 55px !important;
+}
+
+/* Additional custom button classes for consistency */
+.btn-delete-custom {
+  background-color: #dc3545 !important;
+  color: white !important;
+  border: none !important;
+  font-weight: 600 !important;
+  padding: 8px 16px !important;
+  border-radius: 4px !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  font-size: 13px !important;
+  min-width: 70px !important;
+}
+
+.btn-delete-custom:hover {
+  background-color: #c82333 !important;
+  color: white !important;
+  text-decoration: none !important;
+}
+
+/* Specific overrides for inline styled buttons */
+.btn[style*="padding"] {
+  padding: 6px 12px !important;
+  font-size: 12px !important;
+}
+
+/* Better sized buttons for card layouts */
+.card .btn,
+.Card .btn,
+.MuiCard-root .btn {
+  padding: 6px 12px !important;
+  font-size: 12px !important;
+  margin: 1px !important;
+  min-width: 55px !important;
+}

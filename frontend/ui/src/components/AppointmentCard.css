@@ -1,0 +1,204 @@
+/* src/components/AppointmentCard.css */
+.appointment-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: all 0.3s ease;
+  border: 1px solid #e9ecef;
+  position: relative;
+  overflow: hidden;
+}
+
+.appointment-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* Header */
+.appointment-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #f8f9fa;
+}
+
+.appointment-id {
+  font-size: 18px;
+  font-weight: bold;
+  color: #495057;
+}
+
+.appointment-status {
+  padding: 4px 12px;
+  border-radius: 20px;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Information Sections */
+.appointment-info,
+.appointment-details {
+  margin-bottom: 15px;
+}
+
+.info-row,
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  padding: 5px 0;
+}
+
+.label {
+  font-weight: 600;
+  color: #6c757d;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 100px;
+}
+
+.value {
+  font-weight: 500;
+  color: #495057;
+  font-size: 14px;
+  text-align: right;
+  flex: 1;
+  margin-left: 10px;
+}
+
+/* Action Buttons */
+.appointment-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #e9ecef;
+}
+
+.btn-action {
+  flex: 1;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.btn-details {
+  background: #007bff;
+  color: white;
+}
+
+.btn-details:hover {
+  background: #0056b3;
+  transform: scale(1.05);
+}
+
+.btn-edit {
+  background: #ffc107;
+  color: #212529;
+}
+
+.btn-edit:hover {
+  background: #e0a800;
+  transform: scale(1.05);
+}
+
+.btn-delete {
+  background: #dc3545;
+  color: white;
+}
+
+.btn-delete:hover {
+  background: #c82333;
+  transform: scale(1.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .appointment-card {
+    padding: 15px;
+  }
+  
+  .appointment-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .appointment-status {
+    align-self: flex-end;
+  }
+  
+  .info-row,
+  .detail-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+  
+  .label {
+    min-width: auto;
+    font-size: 13px;
+  }
+  
+  .value {
+    text-align: left;
+    margin-left: 0;
+    font-size: 13px;
+    color: #495057;
+    font-weight: 500;
+  }
+  
+  .appointment-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .btn-action {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+  }
+}
+
+/* Additional visual enhancements */
+.appointment-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+}
+
+.appointment-info {
+  background: #f8f9fa;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.appointment-details {
+  background: #e8f5e8;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}

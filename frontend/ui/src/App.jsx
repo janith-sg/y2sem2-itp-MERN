@@ -1,4 +1,4 @@
-// src/App.jsx - FINAL COMPLETE VERSION
+// src/App.jsx
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -15,24 +15,8 @@ import UpdateEmployee from "./components/UpdateEmployee";
 // Pet components
 import PetList from "./components/PetList";
 import InsertPet from "./components/InsertPet";
-import ShowPetDetails from "./components/ShowPetDetails";
+import ShowPet from "./components/ShowPet";
 import UpdatePet from "./components/UpdatePet";
-
-// Appointment components (Team Member 1)
-import AppointmentList from "./components/Appointment/AppointmentList";
-import InsertAppointment from "./components/InsertAppointment/InsertAppointment";
-import EditAppointmentForm from "./components/EditAppointment/EditAppointmentForm";
-import AppointmentDetails from "./components/Appointment/AppointmentDetails";
-
-// Doctor Session components (Team Member 1)
-import DoctorSessionList from "./components/DoctorSession/DoctorSessionList";
-import InsertDoctorSession from "./components/DoctorSession/InsertDoctorSession";
-import EditDoctorSession from "./components/DoctorSession/EditDoctorSession";
-
-// Payment components (Team Member 2)
-import AddUser from "./components/AddUser/AddUser";
-import Users from "./components/Userdetails/Users";
-import UpdateUser from "./components/UpdateUser/UpdateUser";
 
 // Other pages
 import ContactUs from "./components/ContactUs";
@@ -40,23 +24,90 @@ import AboutUs from "./components/AboutUs";
 
 // Auth
 import Login from "./components/Login";
+import SignUp from "./components/SignUp";
+import UsersList from "./components/UsersList";
+import AddInventory from "./components/AddInventory";
+import InventoryList from "./components/InventoryList";
+import InventoryDetails from "./components/InventoryDetails";
+import UpdateInventory from "./components/UpdateInventory";
+import AddAppointment from "./components/AddAppointment";
+import AppointmentList from "./components/AppointmentList";
+import AppointmentDetails from "./components/AppointmentDetails";
+import UpdateAppointment from "./components/UpdateAppointment";
 import AdminDashboard from "./components/AdminDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
-import { AuthProvider } from "./contexts/AuthContext";
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// Cart and Checkout components
+import Cart from "./components/Cart";
+import Checkout from "./components/Checkout";
+import Orders from "./components/Orders";
 
-function App() {
+import { AuthProvider, useAuth } from "./contexts/AuthContext";
+
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from "react-router-dom";
+
+function AppContent() {
+  const location = useLocation();
+  const { user } = useAuth();
+  const hideNavbarRoutes = ["/login", "/signup"];
+  const shouldShowNavbar = !hideNavbarRoutes.includes(location.pathname);
+
+  // Redirect to login if not authenticated (except for login and signup pages)
+  if (!user && location.pathname !== "/login" && location.pathname !== "/signup") {
+    return <Navigate to="/login" replace />;
+  }
+
   return (
-    <AuthProvider>
-      <Router>
-        <Navbar />
-        <Routes>
+    <>
+      {shouldShowNavbar && <Navbar />}
+      <Routes>
           {/* Home */}
           <Route path="/" element={<HomePage />} />
 
           {/* Login */}
           <Route path="/login" element={<Login />} />
+          
+          {/* Sign Up */}
+          <Route path="/signup" element={<SignUp />} />
+          
+          {/* Users List */}
+          <Route path="/users" element={<UsersList />} />
+          
+          {/* Add Inventory - Admin Only */}
+          <Route 
+            path="/add-inventory" 
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <AddInventory />
+              </ProtectedRoute>
+            } 
+          />
+          
+          {/* View Inventory */}
+          <Route path="/inventory" element={<InventoryList />} />
+          
+          {/* Inventory Details */}
+          <Route path="/inventory/:id/details" element={<InventoryDetails />} />
+          
+          {/* Update Inventory */}
+          <Route path="/inventory/:id/edit" element={<UpdateInventory />} />
+          
+          {/* Cart and Checkout */}
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/orders" element={<Orders />} />
+          
+          {/* Add Appointment */}
+          <Route path="/add-appointment" element={<AddAppointment />} />
+          
+          {/* View Appointments */}
+          <Route path="/appointments" element={<AppointmentList />} />
+          
+          {/* Appointment Details */}
+          <Route path="/appointment-details/:id" element={<AppointmentDetails />} />
+          
+          {/* Edit Appointment */}
+          <Route path="/edit-appointment/:id" element={<UpdateAppointment />} />
 
           {/* Employees */}
           <Route path="/employees" element={<EmployeeList />} />
@@ -64,30 +115,16 @@ function App() {
           <Route path="/showdetails/:id" element={<ShowEmployeeDetail />} />
           <Route path="/updatedetails/:id" element={<UpdateEmployee />} />
 
+          {/* Users (same components as employees but with different routes) */}
+          <Route path="/insert-employee" element={<InsertEmployee />} />
+          <Route path="/show-employee-details/:id" element={<ShowEmployeeDetail />} />
+          <Route path="/update-employee/:id" element={<UpdateEmployee />} />
+
           {/* Pets */}
           <Route path="/pets" element={<PetList />} />
           <Route path="/insertpet" element={<InsertPet />} />
-          <Route path="/showpet/:id" element={<ShowPetDetails />} />
+          <Route path="/showpet/:petId" element={<ShowPet />} />
           <Route path="/updatepet/:id" element={<UpdatePet />} />
-
-          {/* Appointments (Team Member 1) */}
-          <Route path="/appointments" element={<AppointmentList />} />
-          <Route path="/add-appointment" element={<InsertAppointment />} />
-          <Route path="/edit-appointment/:id" element={<EditAppointmentForm />} />
-          <Route path="/appointment-details/:id" element={<AppointmentDetails />} />
-
-          {/* Doctor Sessions (Team Member 1) */}
-          <Route path="/doctor-sessions" element={<DoctorSessionList />} />
-          <Route path="/add-doctor-session" element={<InsertDoctorSession />} />
-          <Route path="/edit-doctor-session/:id" element={<EditDoctorSession />} />
-
-          {/* Payments (Team Member 2) */}
-          <Route path="/payments" element={<Users />} />
-          <Route path="/add-payment" element={<AddUser />} />
-          <Route path="/update-payment/:id" element={<UpdateUser />} />
-          {/* Legacy / alternate routes used by other components */}
-          <Route path="/userdetails" element={<Users />} />
-          <Route path="/userdetails/:id" element={<UpdateUser />} />
 
           {/* Contact + About */}
           <Route path="/contact" element={<ContactUs />} />
@@ -102,8 +139,20 @@ function App() {
               </ProtectedRoute>
             }
           />
+          
+          {/* Catch all other routes and redirect to login if not authenticated */}
+          <Route path="*" element={user ? <Navigate to="/" replace /> : <Navigate to="/login" replace />} />
         </Routes>
         <Footer />
+      </>
+  );
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <Router>
+        <AppContent />
       </Router>
     </AuthProvider>
   );

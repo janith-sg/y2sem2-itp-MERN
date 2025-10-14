@@ -6,12 +6,25 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
 import { Link } from "react-router-dom";
+import "./PetCard.css";
 
-const PetCard = ({ pet, onDelete, userRole }) => {
-  const handleDelete = () => onDelete(pet._id);
+const PetCard = ({ pet, onDelete, userRole, currentUser }) => {
+  const handleDelete = () => {
+    if (window.confirm(`Are you sure you want to delete ${pet.name}?`)) {
+      onDelete(pet._id);
+    }
+  };
+
+  // Check if current user can edit/delete this pet
+  const canEditDelete = userRole === "admin" || 
+                       (currentUser && (
+                         pet.ownerId === currentUser.email || 
+                         pet.ownerId === currentUser.id ||
+                         pet.ownerId === currentUser.employeeID
+                       ));
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card className="pet-card" sx={{ maxWidth: 345 }}>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -33,6 +46,7 @@ const PetCard = ({ pet, onDelete, userRole }) => {
             <b>Breed:</b> {pet.breed} <br />
             <b>Color:</b> {pet.color} <br />
             <b>Blood Type:</b> {pet.bloodType} <br />
+            <b>Age:</b> {pet.age ? `${pet.age} years` : 'Not specified'} <br />
             <b>Birthday:</b>{" "}
             {pet.birthday ? new Date(pet.birthday).toLocaleDateString() : "N/A"}{" "}
             <br />
@@ -42,23 +56,35 @@ const PetCard = ({ pet, onDelete, userRole }) => {
         </CardContent>
       </CardActionArea>
 
-      <CardActions>
-        {/* ✅ Only admin can delete */}
-        {userRole === "admin" && (
-          <Button size="medium" color="primary" onClick={handleDelete}>
-            Delete
-          </Button>
-        )}
-
-        <Link className="btn btn-outline-warning" to={`/showpet/${pet._id}`}>
-          Details
+      <CardActions className="pet-card-actions">
+        {/* Details Button - Available for all users - Uses petId */}
+        <Link 
+          className="btn btn-outline-warning" 
+          to={`/showpet/${pet.petId}`}
+        >
+          👁️ Details
         </Link>
 
-        {/* ✅ Only admin can edit */}
-        {userRole === "admin" && (
-          <Link className="btn btn-outline-success" to={`/updatepet/${pet._id}`}>
-            Edit
+        {/* Edit Button - Admin or pet owner can edit - Uses MongoDB _id */}
+        {canEditDelete && (
+          <Link 
+            className="btn btn-outline-success" 
+            to={`/updatepet/${pet._id}`}
+          >
+            ✏️ Edit
           </Link>
+        )}
+
+        {/* Delete Button - Admin or pet owner can delete */}
+        {canEditDelete && (
+          <Button 
+            size="medium" 
+            color="error" 
+            variant="contained"
+            onClick={handleDelete}
+          >
+            🗑️ Delete
+          </Button>
         )}
       </CardActions>
     </Card>

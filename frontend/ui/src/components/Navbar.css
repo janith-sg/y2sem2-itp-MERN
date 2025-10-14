@@ -87,7 +87,7 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(76, 175, 80, 0.05), transparent);
+  background: linear-gradient(90deg, transparent, rgba(46, 125, 50, 0.06), transparent);
   transition: left 0.5s ease;
 }
 
@@ -163,6 +163,144 @@
   background: linear-gradient(135deg, #ef5350 0%, #e53935 100%) !important;
 }
 
+/* App Navbar Styles */
+.app-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #1e7e34 0%, #66bb6a 100%);
+  color: white;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.nav-left .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  text-decoration: none;
+}
+
+.brand-icon {
+  font-size: 22px;
+  display: inline-block;
+}
+
+.brand-text {
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: 0.4px;
+  color: #ffffff;
+}
+
+.nav-center {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  color: rgba(255,255,255,0.95);
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: 700;
+  transition: background 0.12s ease, transform 0.12s ease;
+}
+
+.nav-link:hover {
+  background: rgba(255,255,255,0.08);
+  transform: translateY(-2px);
+}
+
+.nav-right {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* cart icon button */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: white;
+  text-decoration: none;
+  position: relative;
+  padding: 8px;
+}
+
+/* Make cart button visually prominent: white circular background with black icon */
+.cart-btn {
+  background: #ffffff;            /* white circle */
+  border-radius: 999px;
+  padding: 6px 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* cart icon itself should be black for contrast */
+.cart-btn .icon {
+  font-size: 20px;
+  color: #000000 !important;      /* force black color */
+}
+
+/* keep existing badge positioning but ensure contrast */
+.badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: linear-gradient(135deg, #66bb6a 0%, #2e7d32 100%);
+  color: #04240a;
+  padding: 3px 7px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 12px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+}
+
+/* greeting */
+.greeting {
+  color: rgba(255,255,255,0.95);
+  font-weight: 600;
+}
+
+/* Buttons */
+.btn {
+  background: rgba(255,255,255,0.12);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: rgba(255,255,255,0.18);
+  transform: translateY(-2px);
+}
+
+.btn-logout {
+  background: #ff5252;
+  color: white;
+}
+.btn-login, .btn-signup {
+  background: rgba(255,255,255,0.12);
+  color: white;
+}
+
 /* Mobile Responsive */
 @media (max-width: 991.98px) {
   .navbar-premium {
@@ -187,6 +325,9 @@
     justify-content: center;
     width: 100%;
   }
+  
+  .nav-center { display: none; } /* hide center links on small screens */
+  .app-navbar { padding: 10px 12px; }
 }
 
 /* Scroll Effect */
@@ -214,4 +355,66 @@
 
 .navbar-premium {
   animation: slideDown 0.5s ease-out;
+}
+
+/* Admin Badge Styles */
+.admin-badge {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 8px;
+  margin-left: 8px;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 6px rgba(255, 107, 107, 0.3);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 2px 6px rgba(255, 107, 107, 0.3);
+  }
+  50% {
+    box-shadow: 0 2px 10px rgba(255, 107, 107, 0.5);
+  }
+  100% {
+    box-shadow: 0 2px 6px rgba(255, 107, 107, 0.3);
+  }
+}
+
+/* Cart Badge Styles */
+.cart-link {
+  position: relative;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: -8px;
+  background: linear-gradient(135deg, #66bb6a 0%, #2e7d32 100%);
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 2px 5px;
+  border-radius: 50%;
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  animation: cartPulse 1.5s infinite;
+  z-index: 1;
+}
+
+@keyframes cartPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
 }

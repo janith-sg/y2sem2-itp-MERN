@@ -34,7 +34,7 @@ function ShowPetDetail() {
       <div style={{ display: "flex", justifyContent: "space-between", maxWidth: "900px", margin: "0 auto" }}>
         <h1 style={{ color: "#343a40", fontSize: "28px", fontWeight: "600", margin: "0" }}>Pet Detail</h1>
         <Link
-          to={"/"}
+          to={"/pets"}
           style={{
             backgroundColor: "#dc3545",
             color: "white",
@@ -48,7 +48,7 @@ function ShowPetDetail() {
           onMouseOver={(e) => (e.target.style.backgroundColor = "#c82333")}
           onMouseOut={(e) => (e.target.style.backgroundColor = "#dc3545")}
         >
-          ← Back to main
+          ← Back to Pets
         </Link>
       </div>
 
@@ -99,7 +99,10 @@ function ShowPetDetail() {
               ["Name", pet.name],
               ["Species", pet.species],
               ["Breed", pet.breed],
-              ["Age", getAge(pet.birthday)],
+              ["Age", pet.age ? `${pet.age} years` : getAge(pet.birthday)],
+              ["Birthday", pet.birthday ? new Date(pet.birthday).toLocaleDateString() : "—"],
+              ["Color", pet.color],
+              ["Blood Type", pet.bloodType],
               ["Owner Contact", pet.ownerContact],
               ["Owner ID", pet.ownerId],
             ].map(([label, value], i) => (

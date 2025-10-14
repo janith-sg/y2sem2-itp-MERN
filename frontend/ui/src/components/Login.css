@@ -62,3 +62,26 @@
   font-size: 12px;
   color: #6b7280;
 }
+
+.login-footer {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.login-footer p {
+  color: #666;
+  margin: 0;
+  font-size: 14px;
+}
+
+.signup-link {
+  color: #10b981;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.signup-link:hover {
+  color: #059669;
+  text-decoration: underline;
+}

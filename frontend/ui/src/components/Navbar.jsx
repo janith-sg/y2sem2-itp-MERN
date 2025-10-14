@@ -1,105 +1,106 @@
 // Navbar.jsx
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import './Navbar.css';
-import { AuthContext } from '../contexts/AuthContext';
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
+import "./Navbar.css";
 
-const Navbar = () => {
-  const { user, logout } = useContext(AuthContext);
+export default function Navbar() {
+	const { user, logout } = useAuth();
+	const navigate = useNavigate();
+	const [cartCount, setCartCount] = useState(0);
 
-  return (
-    <nav className="navbar navbar-expand-lg navbar-premium">
-      <div className="container-fluid">
-        <Link className="navbar-brand premium-brand" to="/">
-          <span className="brand-icon">🐾</span>
-          <span className="brand-text">
-            <span className="brand-name">PetCare+</span>
-            <span className="brand-subtitle">Clinic</span>
-          </span>
-        </Link>
+	// compute cart count from localStorage
+	const computeCartCount = () => {
+		try {
+			const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+			const total = cart.reduce((s, it) => s + (it.cartQuantity || 0), 0);
+			setCartCount(total);
+		} catch (err) {
+			setCartCount(0);
+		}
+	};
 
-        <button
-          className="navbar-toggler premium-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
+	useEffect(() => {
+		computeCartCount();
+		const onCartUpdated = () => computeCartCount();
+		const onStorage = (e) => {
+			if (e.key === "cart" || e.key === "inventoryItems") computeCartCount();
+		};
+		window.addEventListener("cartUpdated", onCartUpdated);
+		window.addEventListener("storage", onStorage);
+		return () => {
+			window.removeEventListener("cartUpdated", onCartUpdated);
+			window.removeEventListener("storage", onStorage);
+		};
+	}, []);
 
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+	const handleLogout = async () => {
+		try {
+			if (typeof logout === "function") {
+				await logout();
+			} else {
+				// fallback: clear auth-like keys
+				localStorage.removeItem("user");
+				localStorage.removeItem("token");
+			}
+		} catch (err) {
+			console.warn("Logout error:", err);
+		} finally {
+			navigate("/login");
+		}
+	};
 
-            <li className="nav-item">
-              <Link className="nav-link premium-link" to="/">
-                <i className="fas fa-home"></i> Home
-              </Link>
-            </li>
-  
+	return (
+		<nav className="app-navbar">
+			<div className="nav-left">
+				<Link to="/" className="brand">
+					<span className="brand-icon">🐾</span>
+					<span className="brand-text">PetCare+</span>
+				</Link>
+			</div>
 
-            <li className="nav-item">
-              <Link className="nav-link premium-link" to="/about">
-                <i className="fas fa-info-circle"></i> AboutUs
-              </Link>
-            </li>
+			<div className="nav-center">
+				{user?.role === 'admin' ? (
+					<>
+						<Link to="/" className="nav-link">Home</Link>
+						<Link to="/add-inventory" className="nav-link">Add Inventory</Link>
+						<Link to="/appointments" className="nav-link">View Appointments</Link>
+						<Link to="/contact" className="nav-link">Contact Us</Link>
+						<Link to="/about" className="nav-link">About Us</Link>
+						<Link to="/feedback" className="nav-link">Feedback</Link>
+					</>
+				) : (
+					<>
+						<Link to="/" className="nav-link">Home</Link>
+						<Link to="/inventory" className="nav-link">Buy Inventory</Link>
+						<Link to="/add-appointment" className="nav-link">Add Appointment</Link>
+						<Link to="/about" className="nav-link">About Us</Link>
+						<Link to="/contact" className="nav-link">Contact Us</Link>
+						<Link to="/feedback" className="nav-link">Feedbacks</Link>
+					</>
+				)}
+			</div>
 
-            <li className="nav-item">
-              <Link className="nav-link premium-link" to="/contact">
-                <i className="fas fa-envelope"></i> Contact Us
-              </Link>
-            </li>
+			<div className="nav-right">
+				{/* Cart badge */}
+				<Link to="/cart" className="icon-btn cart-btn" aria-label="Cart">
+					<span className="icon">🛒</span>
+					{cartCount > 0 && <span className="badge">{cartCount}</span>}
+				</Link>
 
-            <li className="nav-item">
-              <Link className="nav-link premium-link" to="/feedback">
-                <i className="fas fa-info-circle"></i> Feedbacks
-              </Link>
-            </li>
-
-            {/* Admin link only for admin */}
-            {user?.role === "admin" && (
-              <li className="nav-item">
-                <Link className="nav-link premium-link" to="/admindashboard">
-                  <i className="fas fa-cogs"></i> Admin Dashboard
-                </Link>
-              </li>
-            )}
-          </ul>
-
-          {/* Right side: login/logout */}
-          <ul className="navbar-nav">
-            {user ? (
-              <>
-                <li className="nav-item">
-                  <span className="nav-link">Hi, {user.email}</span>
-                </li>
-                <li className="nav-item">
-                  <button
-                    className="btn premium-logout-btn"
-                    type="button"
-                    onClick={() => {
-                      logout();
-                      window.location = "/login";
-                    }}
-                  >
-                    <i className="fas fa-sign-out-alt"></i> Logout
-                  </button>
-                </li>
-              </>
-            ) : (
-              <li className="nav-item">
-                <Link className="nav-link premium-link" to="/login">
-                  <i className="fas fa-sign-in-alt"></i> Login
-                </Link>
-              </li>
-            )}
-          </ul>
-        </div>
-      </div>
-    </nav>
-  );
-};
-
-export default Navbar;
+				{/* Greeting */}
+				{user ? (
+					<>
+						<span className="greeting">Hi, <strong>{user.email}</strong></span>
+						<button className="btn btn-logout" onClick={handleLogout}>Logout</button>
+					</>
+				) : (
+					<>
+						<Link to="/login" className="btn btn-login">Login</Link>
+						<Link to="/register" className="btn btn-signup">Sign up</Link>
+					</>
+				)}
+			</div>
+		</nav>
+	);
+}

@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useParams, useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 import "./UpdatePet.css";
 
 function UpdatePet() {
+  const { currentUser } = useAuth();
+  const [loading, setLoading] = useState(true);
   const [pet, setPet] = useState({
     petId: "",
     name: "",
@@ -12,6 +15,7 @@ function UpdatePet() {
     bloodType: "",
     color: "",
     birthday: "",
+    age: "",
     ownerContact: "",
     ownerId: "",
     petImage: null,
@@ -22,24 +26,55 @@ function UpdatePet() {
 
   // Load existing pet data
   useEffect(() => {
+    if (!id) {
+      console.error("No pet ID provided");
+      alert("No pet ID provided. Redirecting to pets page.");
+      navigate("/pets");
+      return;
+    }
+
+    console.log("Loading pet data for ID:", id);
+    setLoading(true);
+    
     axios
       .get(`http://localhost:3000/api/pets/${id}`)
       .then((res) => {
+        console.log("Pet data received:", res.data);
         setPet({
-          petId: res.data.petId,
-          name: res.data.name,
-          species: res.data.species,
-          breed: res.data.breed,
-          bloodType: res.data.bloodType,
-          color: res.data.color,
+          petId: res.data.petId || "",
+          name: res.data.name || "",
+          species: res.data.species || "",
+          breed: res.data.breed || "",
+          bloodType: res.data.bloodType || "",
+          color: res.data.color || "",
           birthday: res.data.birthday ? res.data.birthday.split("T")[0] : "",
-          ownerContact: res.data.ownerContact,
-          ownerId: res.data.ownerId,
+          age: res.data.age || "",
+          ownerContact: res.data.ownerContact || "",
+          ownerId: res.data.ownerId || "",
           petImage: res.data.petImage || null,
         });
+        setLoading(false);
       })
       .catch((err) => {
-        console.log("Error fetching pet data", err);
+        console.error("Error fetching pet data:", err);
+        console.error("Error response:", err.response);
+        
+        if (err.response) {
+          // Server responded with error status
+          if (err.response.status === 404) {
+            alert("Pet not found. Redirecting to pets page.");
+            navigate("/pets");
+          } else {
+            alert(`Error loading pet data: ${err.response.data.message || err.response.data.error || 'Unknown error'}`);
+          }
+        } else if (err.request) {
+          // Request was made but no response received
+          alert("Cannot connect to server. Please check if the backend server is running.");
+        } else {
+          // Something else happened
+          alert("Error loading pet data. Please try again.");
+        }
+        setLoading(false);
       });
   }, [id]);
 
@@ -54,6 +89,18 @@ function UpdatePet() {
   const onSubmit = (e) => {
     e.preventDefault();
 
+    // Validate required fields
+    if (!pet.name || !pet.species || !pet.breed) {
+      alert("Please fill in all required fields (Name, Species, Breed)");
+      return;
+    }
+
+    // Validate age if provided
+    if (pet.age && (parseInt(pet.age) < 0 || parseInt(pet.age) > 50)) {
+      alert("Pet age must be between 0 and 50 years.");
+      return;
+    }
+
     const formData = new FormData();
     Object.keys(pet).forEach((key) => {
       if (key === "petImage" && pet.petImage instanceof File) {
@@ -63,17 +110,42 @@ function UpdatePet() {
       }
     });
 
+    console.log("Updating pet with data:", pet);
+
     axios
       .put(`http://localhost:3000/api/pets/${id}`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       })
-      .then(() => {
-        navigate(`/showpet/${id}`);
+      .then((response) => {
+        console.log("Pet updated successfully:", response.data);
+        alert("Pet updated successfully!");
+        navigate("/pets");
       })
       .catch((err) => {
         console.log("Error updating pet", err);
+        alert("Error updating pet. Please try again.");
       });
   };
+
+  if (loading) {
+    return (
+      <div className="UpdatePet">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-8 m-auto">
+              <br />
+              <h2>Loading pet data...</h2>
+              <div className="text-center">
+                <div className="spinner-border" role="status">
+                  <span className="sr-only">Loading...</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="UpdatePet">
@@ -81,11 +153,13 @@ function UpdatePet() {
         <div className="row">
           <div className="col-md-8 m-auto">
             <br />
-            <Link to="/" className="btn btn-outline-warning float-left">
+            <Link to="/pets" className="btn btn-outline-warning float-left">
               Show Pet List
             </Link>
           </div>
         </div>
+
+       
 
         <div className="col-md-8 m-auto">
           <form noValidate onSubmit={onSubmit}>
@@ -96,7 +170,8 @@ function UpdatePet() {
                 name="petId"
                 className="form-control"
                 value={pet.petId}
-                onChange={onChange}
+                readOnly
+                style={{ backgroundColor: "#f8f9fa", cursor: "not-allowed" }}
               />
             </div>
             <br />
@@ -180,6 +255,21 @@ function UpdatePet() {
             <br />
 
             <div className="form-group">
+              <label>Age (in years)</label>
+              <input
+                type="number"
+                name="age"
+                className="form-control"
+                value={pet.age}
+                onChange={onChange}
+                min="0"
+                max="50"
+                placeholder="Enter pet's age in years"
+              />
+            </div>
+            <br />
+
+            <div className="form-group">
               <label>Owner Contact</label>
               <input
                 type="text"
@@ -198,7 +288,8 @@ function UpdatePet() {
                 name="ownerId"
                 className="form-control"
                 value={pet.ownerId}
-                onChange={onChange}
+                readOnly
+                style={{ backgroundColor: "#f8f9fa", cursor: "not-allowed" }}
               />
             </div>
             <br />
@@ -210,13 +301,27 @@ function UpdatePet() {
                 name="petImage"
                 className="form-control"
                 onChange={onFileChange}
+                accept="image/*"
               />
               {pet.petImage && typeof pet.petImage === "string" && (
-                <img
-                  src={`http://localhost:3000/${pet.petImage.replace("\\", "/")}`}
-                  alt={pet.name}
-                  style={{ width: "150px", marginTop: "10px" }}
-                />
+                <div style={{ marginTop: "10px" }}>
+                  <p><strong>Current Image:</strong></p>
+                  <img
+                    src={`http://localhost:3000/${pet.petImage.replace("\\", "/")}`}
+                    alt={pet.name}
+                    style={{ width: "150px", height: "150px", objectFit: "cover", border: "1px solid #ddd", borderRadius: "5px" }}
+                  />
+                </div>
+              )}
+              {pet.petImage && typeof pet.petImage === "object" && (
+                <div style={{ marginTop: "10px" }}>
+                  <p><strong>New Image Selected:</strong></p>
+                  <img
+                    src={URL.createObjectURL(pet.petImage)}
+                    alt="New pet image"
+                    style={{ width: "150px", height: "150px", objectFit: "cover", border: "1px solid #ddd", borderRadius: "5px" }}
+                  />
+                </div>
               )}
             </div>
             <br />

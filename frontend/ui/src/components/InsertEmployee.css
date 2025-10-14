@@ -31,6 +31,11 @@ body {
   font-size: 28px;
 }
 
+/* Form Group */
+.form-group {
+  margin-bottom: 20px;
+}
+
 /* Labels */
 .employee-form label {
   display: block;
@@ -41,38 +46,160 @@ body {
 
 /* Inputs */
 .employee-form input[type="text"],
+.employee-form input[type="email"],
 .employee-form input[type="file"] {
   width: 100%;
   padding: 12px;
-  margin-bottom: 16px;
-  border: 1px solid #ccc;
+  margin-bottom: 8px;
+  border: 2px solid #ccc;
   border-radius: 10px;
   transition: border 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
 }
 
+/* Input Focus */
 .employee-form input[type="text"]:focus,
-.employee-form input[type="file"]:focus {
-  border-color: #2563eb;
-  box-shadow: 0 0 6px rgba(37, 99, 235, 0.4);
+.employee-form input[type="email"]:focus {
+  border-color: #1d4ed8;
+  box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.1);
   outline: none;
 }
 
-/* Pets Section */
-.employee-form h3 {
-  margin: 20px 0 10px;
-  color: #222;
-  font-size: 20px;
+/* Help Text */
+.help-text {
+  display: block;
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 8px;
+  font-style: italic;
 }
 
-.pet-fields {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+/* Error Messages */
+.error-message {
+  display: block;
+  color: #dc2626;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+/* Loading Message */
+.loading-message {
+  text-align: center;
+  color: #1d4ed8;
+  font-weight: 500;
   margin-bottom: 15px;
-  background: #f9fafb;
-  padding: 15px;
+}
+
+/* Disabled Input (for Employee ID) */
+.employee-form input:disabled {
+  background-color: #f5f5f5 !important;
+  cursor: not-allowed !important;
+  color: #333 !important;
+  font-weight: bold !important;
+  border-color: #ddd !important;
+}
+
+/* Pets Section */
+.pets-section {
+  border-top: 2px solid #e5e7eb;
+  padding-top: 20px;
+  margin-top: 20px;
+}
+
+.pets-section h3 {
+  color: #374151;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.pet-group {
+  margin-bottom: 15px;
+}
+
+.pet-inputs {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.pet-inputs input {
+  flex: 1;
+  margin-bottom: 0 !important;
+}
+
+/* Pet Buttons */
+.add-pet-btn, .remove-pet-btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.add-pet-btn {
+  background-color: #10b981;
+  color: white;
+  margin-top: 10px;
+}
+
+.add-pet-btn:hover {
+  background-color: #059669;
+  transform: translateY(-1px);
+}
+
+.remove-pet-btn {
+  background-color: #ef4444;
+  color: white;
+  min-width: 40px;
+  flex-shrink: 0;
+}
+
+.remove-pet-btn:hover {
+  background-color: #dc2626;
+}
+
+/* Form Actions */
+.form-actions {
+  margin-top: 30px;
+  text-align: center;
+}
+
+/* Submit Button */
+.submit-btn {
+  background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+  color: white;
+  padding: 14px 30px;
+  border: none;
   border-radius: 12px;
-  box-shadow: inset 0px 2px 6px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  min-width: 200px;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #1e40af, #2563eb);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(29, 78, 216, 0.3);
+}
+
+.submit-btn:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Required Note */
+.required-note {
+  text-align: center;
+  margin-top: 15px;
+  color: #6b7280;
+  font-style: italic;
 }
 
 /* Buttons */

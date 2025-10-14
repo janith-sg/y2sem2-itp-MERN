@@ -1,4 +1,13 @@
 {
+  "name": "frontend",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "cd ui && npm run dev",
+    "build": "cd ui && npm run build",
+    "install-ui": "cd ui && npm install",
+    "lint": "cd ui && npm run lint",
+    "preview": "cd ui && npm run preview"
+  },
   "dependencies": {
     "jspdf": "^3.0.3",
     "jspdf-autotable": "^5.0.2",

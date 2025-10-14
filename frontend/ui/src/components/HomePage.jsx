@@ -1,10 +1,12 @@
 // src/components/HomePage.jsx
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 import "./HomePage.css";
 
 const HomePage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { user } = useAuth();
   
   // Slideshow images (you can replace these with your actual images)
   const slides = [
@@ -93,10 +95,10 @@ const HomePage = () => {
       {/* Main Buttons Grid */}
       <section className="features-section">
         <div className="features-grid">
-          <Link to="/employees" className="feature-card">
+          <Link to="/users" className="feature-card">
             <div className="card-icon">👥</div>
-            <h3>View Users</h3>
-            <p>Manage staff and user accounts</p>
+            <h3>{user?.role === 'admin' ? 'Manage All Users' : 'My Profile'}</h3>
+            <p>{user?.role === 'admin' ? 'View and manage all user accounts in the system' : 'View and edit your personal profile information'}</p>
           </Link>
 
           <Link to="/pets" className="feature-card">
@@ -105,29 +107,16 @@ const HomePage = () => {
             <p>Access pet profiles and records</p>
           </Link>
 
-          {/* Team Member 1 Cards */}
+          <Link to="/inventory" className="feature-card">
+            <div className="card-icon">📦</div>
+            <h3>View Inventory</h3>
+            <p>Manage medical supplies and stock</p>
+          </Link>
+
           <Link to="/appointments" className="feature-card">
             <div className="card-icon">📅</div>
             <h3>View Appointments</h3>
-            <p>Check and manage appointments</p>
-          </Link>
-
-          <Link to="/add-appointment" className="feature-card">
-            <div className="card-icon">➕</div>
-            <h3>Create Appointment</h3>
-            <p>Schedule new appointments</p>
-          </Link>
-
-          <Link to="/doctor-sessions" className="feature-card">
-            <div className="card-icon">👨‍⚕️</div>
-            <h3>View Sessions</h3>
-            <p>View Doctor sessions</p>
-          </Link>
-
-          <Link to="/inventory" className="feature-card">
-            <div className="card-icon">📦</div>
-            <h3>Inventory</h3>
-            <p>Manage medical supplies and stock</p>
+            <p>View and manage appointments</p>
           </Link>
 
           <Link to="/medical-records" className="feature-card">
@@ -138,7 +127,7 @@ const HomePage = () => {
 
           <Link to="/doctorsession" className="feature-card">
             <div className="card-icon">👨‍⚕️</div>
-            <h3>Veiw Sessions</h3>
+            <h3>View Sessions</h3>
             <p>View Doctor sessions </p>
           </Link>
 
