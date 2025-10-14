@@ -31,7 +31,7 @@ const getId = (rec) => {
 };
 
 // Base URL for API (no trailing /)
-const RAW_BASE = import.meta?.env?.VITE_API_URL || "http://localhost:5000";
+const RAW_BASE = import.meta?.env?.VITE_API_URL || "http://localhost:3000/api";
 const API_BASE = RAW_BASE.replace(/\/+$/, "");
 
 const RecordDetailsModal = ({ record, onClose, onEdit }) => {
