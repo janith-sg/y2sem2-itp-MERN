@@ -61,6 +61,16 @@ import { AuthProvider, useAuth } from "./contexts/AuthContext";
 
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from "react-router-dom";
 
+// Doctor Session components (Team Member 1)
+import DoctorSessionList from "./components/DoctorSession/DoctorSessionList";
+import InsertDoctorSession from "./components/DoctorSession/InsertDoctorSession";
+import EditDoctorSession from "./components/DoctorSession/EditDoctorSession";
+
+// Payment components (Team Member 2)
+import AddUser from "./components/AddUser/AddUser";
+import Users from "./components/Userdetails/Users";
+import UpdateUser from "./components/UpdateUser/UpdateUser";
+
 // Medical Records Wrappers
 const AdminMedicalRecords = () => (
   <Layout pathPrefix="">
@@ -211,6 +221,19 @@ function AppContent() {
         {/* Contact + About */}
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/about" element={<AboutUs />} />
+
+          {/* Doctor Sessions (Team Member 1) */}
+          <Route path="/doctor-sessions" element={<DoctorSessionList />} />
+          <Route path="/add-doctor-session" element={<InsertDoctorSession />} />
+          <Route path="/edit-doctor-session/:id" element={<EditDoctorSession />} />
+
+          {/* Payments (Team Member 2) */}
+          <Route path="/payments" element={<Users />} />
+          <Route path="/add-payment" element={<AddUser />} />
+          <Route path="/update-payment/:id" element={<UpdateUser />} />
+          {/* Legacy / alternate routes used by other components */}
+          <Route path="/userdetails" element={<Users />} />
+          <Route path="/userdetails/:id" element={<UpdateUser />} />
 
         {/* Admin (protected) */}
         <Route

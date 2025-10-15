@@ -7,7 +7,7 @@ import "./HomePage.css";
 const HomePage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const { user } = useAuth();
-  
+
   // Slideshow images (you can replace these with your actual images)
   const slides = [
     {
@@ -50,7 +50,7 @@ const HomePage = () => {
 
   return (
     <div className="home-container">
-      
+
       {/* Slideshow Section */}
       <section className="slideshow-container">
         <div className="slideshow">
@@ -67,11 +67,11 @@ const HomePage = () => {
             </div>
           ))}
         </div>
-        
+
         {/* Slideshow Controls */}
         <button className="slide-control prev" onClick={prevSlide}>‹</button>
         <button className="slide-control next" onClick={nextSlide}>›</button>
-        
+
         {/* Slideshow Indicators */}
         <div className="slide-indicators">
           {slides.map((_, index) => (
@@ -119,28 +119,37 @@ const HomePage = () => {
             <p>View and manage appointments</p>
           </Link>
 
-          {/* Medical Records Cards - Conditionally Shown Based on Role */}
-{user?.role === 'admin' && (
-  <Link to="/medical-records" className="feature-card">
-    <div className="card-icon">🏥</div>
-    <h3>Medical Records</h3>
-    <p>Access complete medical history and records</p>
-  </Link>
-)}
+          {user?.role === 'admin' && (
+            <Link to="/medical-records" className="feature-card">
+              <div className="card-icon">🏥</div>
+              <h3>Medical Records</h3>
+              <p>Access complete medical history and records</p>
+            </Link>
+          )}
 
-{user?.role === 'user' && (
-  <Link to="/user/petid-gate" className="feature-card">
-    <div className="card-icon">📋</div>
-    <h3>My Pet's Records</h3>
-    <p>View your pet's medical history</p>
-  </Link>
-)}
+          {user?.role === 'user' && (
+            <Link to="/user/petid-gate" className="feature-card">
+              <div className="card-icon">📋</div>
+              <h3>My Pet's Records</h3>
+              <p>View your pet's medical history</p>
+            </Link>
+          )}
 
-          <Link to="/doctorsession" className="feature-card">
-            <div className="card-icon">👨‍⚕️</div>
-            <h3>View Sessions</h3>
-            <p>View Doctor sessions </p>
-          </Link>
+          {user?.role === 'admin' && (
+            <Link to="/add-doctor-session" className="feature-card">
+              <div className="card-icon">➕</div>
+              <h3>Add Sessions</h3>
+              <p>Add Doctor sessions </p>
+            </Link>
+          )}
+
+          {user?.role === 'user' && (
+            <Link to="/doctor-sessions" className="feature-card">
+              <div className="card-icon">👨‍⚕️</div>
+              <h3>View Sessions</h3>
+              <p>View Doctor sessions </p>
+            </Link>
+          )}
 
           <Link to="/payments" className="feature-card">
             <div className="card-icon">💳</div>
@@ -154,7 +163,7 @@ const HomePage = () => {
             <p>Share your experience with us</p>
           </Link>
 
-          
+
         </div>
       </section>
 

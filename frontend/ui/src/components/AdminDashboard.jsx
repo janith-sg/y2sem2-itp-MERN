@@ -26,8 +26,18 @@ const AdminDashboard = () => {
           <Link to="/appointments">
             <Button fullWidth className="btn primary">Add Appointments</Button>
           </Link>
-          <Link to="/appointments">
-            <Button fullWidth className="btn primary">Doctor Session</Button>
+          <Link to="/doctor-sessions">
+            <Button fullWidth className="btn primary">Doctor Sessions</Button>
+          </Link>
+          <Link to="/add-doctor-session">
+            <Button fullWidth className="btn primary">Add Doctor Session</Button>
+          </Link>
+          {/* Team Member 2 Payment Buttons */}
+          <Link to="/payments">
+            <Button fullWidth className="btn primary">View Payments</Button>
+          </Link>
+          <Link to="/add-payment">
+            <Button fullWidth className="btn primary">Add Payment</Button>
           </Link>
           <Link to="/medical-records">
             <Button fullWidth className="btn primary">Medical Records</Button>

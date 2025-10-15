@@ -1,3 +1,4 @@
+{/* NOT USING THIS PAGE  */}
 // src/pages/Dashboard.jsx
 "use client";
 
@@ -30,6 +31,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <div className="dashboard-header">
+        {/* NOT USING THIS PAGE  */}
         <h1 className="dashboard-title">Dashboard</h1>
         <p className="dashboard-subtitle">Welcome back! Here's what's happening at your clinic today.</p>
       </div>

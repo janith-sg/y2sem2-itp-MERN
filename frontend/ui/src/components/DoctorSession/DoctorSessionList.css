@@ -1,0 +1,32 @@
+/* DoctorSessionList.css */
+
+/* Container styling */
+.doctor-session-list {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Page title */
+.doctor-session-list h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #2c3e50;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+/* Grid container adjustments */
+.doctor-session-list .MuiGrid-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Optional: responsive adjustment for small screens */
+@media (max-width: 600px) {
+  .doctor-session-list h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+}
